@@ -1,6 +1,14 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var configDB = require('./config/database.js');
 var app = express();
+
+// mongodb connection
+mongoose.connect(configDB.url);
+var db = mongoose.connection;
+// mongo error
+db.on('error', console.error.bind(console, 'connection error:'));
 
 // parse incoming requests
 app.use(bodyParser.json());
