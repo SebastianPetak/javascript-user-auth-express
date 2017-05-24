@@ -1,8 +1,16 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var session = require('express-session');
 var configDB = require('./config/database.js');
 var app = express();
+
+// use session for tracking logins
+app.use(session({
+  secret: 'treehouse loves you',
+  resave: true,
+  saveUninitialized: false
+}))
 
 // mongodb connection
 mongoose.connect(configDB.url);
